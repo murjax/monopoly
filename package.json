@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "release": "tsc && npm test",
+    "lint": "./node_modules/.bin/tslint  './tests/**/*.ts' && ./node_modules/.bin/tslint  './monopoly/**/*.ts'",
+    "watch": "tsc --watch",
+    "test": "karma start"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.5.53",
+    "jasmine": "^3.3.1",
+    "jasmine-core": "^3.3.0",
+    "karma": "^3.1.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-commonjs": "^1.0.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "phantom": "^6.0.3",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4"
+  }
+}

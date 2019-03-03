@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "es3",
+		"module": "es2015",
+		"sourceMap": false,
+		"strict": true,
+		"outDir": "dest",
+		"experimentalDecorators": true,
+		"moduleResolution": "classic",
+		"lib": [
+			"dom",
+			"es7"
+		],
+		"strictNullChecks": false
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

@@ -1,0 +1,42 @@
+##Release 2: Go, Go To Jail, Income Tax, Luxury Tax When a player lands on go, they receive $200. When a player passes go, they receive $200. Note they get the money at the time they land on or pass over go, not the next turn. The do not get any money for leaving go (e.g. during the first turn or if they landed on go the previous turn).
+
+When a player lands on go to jail, they are moved directly to "Just Visiting". They do not receive any money for passing go since they went directly to just visiting. Note that we are making this simple for now, we deal with the details of jail later.
+
+When a player lands on Income Tax, they must pay 20% of their net worth or $200, whichever is the smaller amount (a simplified version of the rule).
+
+When a player lands on luxury tax, they must pay $75.
+
+####As a player, when I land on go I get $200 as my salary for staying in the game.
+
+User Acceptance Tests
+
+During a turn a Player lands on Go and their balance increases by $200.
+During a turn a Player lands on some "normal" location and their balance does not change.
+####As a player, I receive $200 when I pass over Go.
+
+User Acceptance Tests
+
+Player starts before Go near the end of the Board, rolls enough to pass Go. The - - Player's balance increases by $200.
+Player starts on Go, takes a turn where the Player does not additionally land on or pass over Go. Their balance remains unchanged.
+Player passes go twice during a turn. Their balance increases by $200 each time for a total change of $400.
+####As a Player, when I land on Go To Jail during a turn I move directly to Just Visiting.
+
+User Acceptance Tests
+
+Player starts before Go To Jail, lands on Go To Jail, ends up on Just Visiting and their balance is unchanged.
+Player starts before Go To Jail, rolls enough to pass over Go To Jail but not enough to land on or pass over go. Their balance is unchanged and they end up where the should based on what they rolled.
+####As a Player, landing on Income Tax forces me to pay the smaller of 10% of my total worth or $200.
+
+User Acceptance Tests
+
+During a turn, a Player with an initial total worth of $1800 lands on Income Tax. The balance decreases by $180.
+During a turn, a Player with an initial total worth of $2200 lands on Income Tax. The balance decreases by $200.
+During a turn, a Player with an initial total worth of $0 lands on Income Tax. The balance decreases by $0.
+During a turn, a Player with an initial total worth of $2000 lands on Income Tax. The balance decreases by $200.
+During a turn, a Player passes over Income Tax. Nothing happens.
+####As a Player, when I land on Luxury Tax, I pay $75.
+
+User Acceptance Tests
+
+Player takes a turn and lands on Luxury tax. Their balance decreases by $75.
+Player passes Luxury Tax during a turn. Their balance is unchanged.

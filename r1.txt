@@ -1,0 +1,23 @@
+##Release 1:
+Basic Board and Player Movement For this first release, we want to be able to support the basic player movement. All players start on the first location. The players' order is initially determined randomly and then maintained for the remainder of the game. Each player takes a turn, during which they roll a pair of dice, move from their current location to a destination calculated based on their current location plus the roll of the dice. The board has a total of 40 locations. When the player reaches the end of the board, s/he starts back at the beginning again. Since this version is so simple, we'll simply play a total of 20 rounds, where a round means every player takes a turn.
+
+###Player Movement ####
+As a player, I can take a turn so that I can move around the board.
+
+User Acceptance Tests
+
+Player on beginning location (numbered 0), rolls 7, ends up on location 7
+Player on location numbered 39, rolls 6, ends up on location 5
+####As a game, I can have between 2 and 8 players with an initial random ordering.
+
+User Acceptance Tests
+
+Create a game with two players named Horse and Car.
+Try to create a game with < 2 or > 8 players. When attempting to play the game, it will fail.
+Create a game with two players named Horse and Car. Within creating 100 games, both orders [Horse, Car] and [car, horse] occur.
+####As a game, I execute 20 rounds so that I can complete a game.
+
+User Acceptance Tests
+
+Create a game and play, verify that the total rounds was 20 and that each player played 20 rounds.
+Create a game and play, verify that in every round the order of the players remained the same.
