@@ -1,9 +1,7 @@
 import { } from "jasmine";
 
 describe("Game", () => {
-  it("is true", () => {
-    expect(1).toEqual(1);
-  });
+  // R1 Tests
 
   it("starts player on position 0", () => {
     const name = "Car";
@@ -133,5 +131,134 @@ describe("Game", () => {
       expect(board.players[0]).toEqual(boardPlayerOne);
       expect(board.players[1]).toEqual(boardPlayerTwo);
     }
+  });
+
+  // R2 Tests
+
+  it("During a turn a Player lands on Go and their balance increases by $200.", () => {
+    const player = new Player("Car");
+    player.position = 34;
+    expect(player.balance).toEqual(0);
+    spyOn(player, "roll").and.returnValue(6);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(200);
+  });
+
+  it("During a turn a Player lands on some 'normal' location and their balance does not change.", () => {
+    const player = new Player("Car");
+    player.position = 34;
+    expect(player.balance).toEqual(0);
+    spyOn(player, "roll").and.returnValue(2);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(0);
+  });
+
+  it("Player starts before Go near the end of the Board, rolls enough to pass Go. The - - Player's balance increases by $200.", () => {
+    const player = new Player("Car");
+    player.position = 39;
+    expect(player.balance).toEqual(0);
+    spyOn(player, "roll").and.returnValue(6);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(200);
+  });
+
+  it("Player starts on Go, takes a turn where the Player does not additionally land on or pass over Go. Their balance remains unchanged.", () => {
+    const player = new Player("Car");
+    player.position = 0;
+    expect(player.balance).toEqual(0);
+    spyOn(player, "roll").and.returnValue(6);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(0);
+  });
+
+  it("Player passes go twice during a turn. Their balance increases by $200 each time for a total change of $400.", () => {
+    const player = new Player("Car");
+    player.position = 0;
+    expect(player.balance).toEqual(0);
+    spyOn(player, "roll").and.returnValue(50);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(200);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(400);
+  });
+
+  it("Player starts before Go To Jail, lands on Go To Jail, ends up on Just Visiting and their balance is unchanged.", () => {
+    const player = new Player("Car");
+    player.position = 20;
+    spyOn(player, "roll").and.returnValue(10);
+    player.rollAndSetPosition();
+    expect(player.position).toEqual(10);
+  });
+
+  it("Player starts before Go To Jail, rolls enough to pass over Go To Jail but not enough to land on or pass over go. Their balance is unchanged and they end up where the should based on what they rolled.", () => {
+    const player = new Player("Car");
+    player.position = 20;
+    spyOn(player, "roll").and.returnValue(11);
+    player.rollAndSetPosition();
+    expect(player.position).toEqual(31);
+    expect(player.balance).toEqual(0);
+  });
+
+  it("During a turn, a Player with an initial total worth of $800 lands on Income Tax. The balance decreases by $160.", () => {
+    const player = new Player("Car");
+    player.position = 0;
+    player.balance = 800;
+    spyOn(player, "roll").and.returnValue(4);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(640);
+  });
+
+  it("During a turn, a Player with an initial total worth of $2200 lands on Income Tax. The balance decreases by $200.", () => {
+    const player = new Player("Car");
+    player.position = 0;
+    player.balance = 2200;
+    spyOn(player, "roll").and.returnValue(4);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(2000);
+  });
+
+  it("During a turn, a Player with an initial total worth of $0 lands on Income Tax. The balance decreases by $0.", () => {
+    const player = new Player("Car");
+    player.position = 0;
+    player.balance = 0;
+    spyOn(player, "roll").and.returnValue(4);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(0);
+  });
+
+  it("During a turn, a Player with an initial total worth of $1000 lands on Income Tax. The balance decreases by $200.", () => {
+    const player = new Player("Car");
+    player.position = 0;
+    player.balance = 1000;
+    spyOn(player, "roll").and.returnValue(4);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(800);
+  });
+
+  it("During a turn, a Player passes over Income Tax. Nothing happens.", () => {
+    const player = new Player("Car");
+    player.position = 0;
+    player.balance = 1000;
+    spyOn(player, "roll").and.returnValue(5);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(1000);
+  });
+
+  it("Player takes a turn and lands on Luxury tax. Their balance decreases by $75.", () => {
+    const player = new Player("Car");
+    player.position = 30;
+    player.balance = 1000;
+    spyOn(player, "roll").and.returnValue(8);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(925);
+  });
+
+  it("Player passes Luxury Tax during a turn. Their balance is unchanged.", () => {
+    const player = new Player("Car");
+    player.position = 30;
+    player.balance = 1000;
+    spyOn(player, "roll").and.returnValue(9);
+    player.rollAndSetPosition();
+    expect(player.balance).toEqual(1000);
   });
 });
